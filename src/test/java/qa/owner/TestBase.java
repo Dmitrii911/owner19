@@ -3,6 +3,7 @@ package qa.owner;
 import com.codeborne.selenide.Configuration;
 import com.google.common.base.Strings;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import qa.owner.config.WebConfig;
 
@@ -11,8 +12,8 @@ import java.util.Map;
 public class TestBase {
 
     static WebConfig config = ConfigFactory.create(WebConfig.class, System.getProperties());
-
-    public static void configure() {
+    @BeforeAll
+    public static void configureEnv () {
 
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browser = config.browser();

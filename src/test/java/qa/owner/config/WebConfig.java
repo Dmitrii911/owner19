@@ -24,6 +24,5 @@ public interface WebConfig extends Config {
     String getBrowserVersion();
 
     @Key("remoteUrl")
-    @DefaultValue("http://localhost:4444")
     String remoteUrl();
 }
