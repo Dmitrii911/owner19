@@ -12,22 +12,19 @@ import java.util.Map;
 public class TestBase {
 
     static WebConfig config = ConfigFactory.create(WebConfig.class, System.getProperties());
+
     @BeforeAll
-    public static void configureEnv () {
+    public static void configureEnv() {
 
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browser = config.browser();
-
-        String remoteUrl = config.remoteUrl();
-        if (!Strings.isNullOrEmpty(remoteUrl)) {
-            Configuration.remote = remoteUrl;
-            Configuration.browserVersion = config.getBrowserVersion();
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                    "enableVNC", true,
-                    "enableVideo", true
-            ));
-            Configuration.browserCapabilities = capabilities;
-        }
+        Configuration.remote = config.remoteUrl();
+        Configuration.browserVersion = config.getBrowserVersion();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
 }
